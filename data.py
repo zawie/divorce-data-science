@@ -20,9 +20,10 @@ def get():
                 x.append(elements)  #add input matrix
     return x,y
 
-def split(num_train):
+def split(train_ratio):
     x_test,y_test = get()
     x_train, y_train = [],[]
+    num_train = int(train_ratio * len(x_test))
     for i in range(num_train):
         size = len(x_test)
         r = random.randint(0,size-1)
