@@ -21,6 +21,11 @@ def trainAndTest(X,y):
     return total_acc/run_times
 
 def getColumns():
+    """
+    Inputs: None
+    Outputs: Number of columns in input. 
+    (Note, inputs is constantly modified)
+    """
     return len(inputs[0])
 
 def removeColumn(X,col):
@@ -29,7 +34,6 @@ def removeColumn(X,col):
         rem_col.append(X[r].pop(col))
     return rem_col
 
-#TODO: switch to True once we actually want to run it
 while getColumns() > 1:
     num_columns = getColumns()
     lowest_impact_idx = 0

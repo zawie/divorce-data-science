@@ -2,6 +2,11 @@ import csv
 import random
 
 def shuffle(X,y):
+    """
+    Inputs: The ordered input matrix (X) and label list (y)
+    Outputs: The shuffled X and y matrix
+        Shuffle the row of input Matrix (X) and the labels list (y) 
+    """
     size = len(X)
     new_X,new_y = [],[]
     for _ in range(size):
@@ -11,6 +16,9 @@ def shuffle(X,y):
     return new_X,new_y
 
 def get():
+    """
+    Reads from divorce.cvs and splits the label and input data
+    """
     x = [] #questions
     y = [] #divorce or no divorce
     with open('divorce.csv', newline='') as csvfile:
@@ -30,5 +38,8 @@ def get():
     return x,y
 
 def get_shuffled():
+    """
+    Returns the shuffled data from divorce.cvs
+    """
     X,y = get()
     return shuffle(X,y)
