@@ -117,7 +117,6 @@ for t in range(NUM_TRIALS):
     inputs, labels = data.get_shuffled()
     headers = list(range(1,55))
 
-
 """
 Compute average accuracy over the trials, and export via CVS
 """
