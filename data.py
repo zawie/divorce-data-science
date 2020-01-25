@@ -32,7 +32,3 @@ def get():
 def get_shuffled():
     X,y = get()
     return shuffle(X,y)
-
-def assess_results(model):
-    pass
-
