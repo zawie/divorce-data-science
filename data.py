@@ -20,9 +20,12 @@ def get():
                 x.append(elements)  #add input matrix
     return x,y
 
-def split(lst,num_train):
-    train_lst = []
+def split(num_train):
+    x_test,y_test = get()
+    x_train, y_train = [],[]
     for i in range(num_train):
-        r = random.randint(0,len(lst)-1)
-        train_lst.append(lst.pop(r))
-    return  train_lst,lst
+        size = len(x_test)
+        r = random.randint(0,size-1)
+        x_train.append(x_test.pop(r))
+        y_train.append(y_test.pop(r))
+    return  x_train,y_train,x_test,y_test
