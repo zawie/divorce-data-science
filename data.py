@@ -1,7 +1,6 @@
 import csv
-from sklearn import svm
  
-def getData():
+def get():
     x = [] #questions
     y = [] #divorce or no divorce
     with open('divorce.csv', newline='') as csvfile:
@@ -19,16 +18,3 @@ def getData():
                 y.append(elements.pop()) #add divorce stat to y list
                 x.append(elements)  #add input matrix
     return x,y
-
-X,y= getData()
-num_inputs = len
-
-
-
-print(X,y)
-#X = [[0, 0], [1, 1]] #inputs
-#y = [0, 1] #groups
-
-clf = svm.SVC()
-clf.fit(X, y)
-print(clf.predict([[0]*len(X[0])]))
