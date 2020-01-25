@@ -30,3 +30,6 @@ def split(train_ratio):
         x_train.append(x_test.pop(r))
         y_train.append(y_test.pop(r))
     return  x_train,y_train,x_test,y_test
+
+def assess_results(model):
+    pass
