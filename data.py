@@ -26,7 +26,7 @@ def split(train_ratio):
     num_train = int(train_ratio * len(x_test))
     for i in range(num_train):
         size = len(x_test)
-        r = random.randint(0,size-1)
+        r = random.randint(0,size)
         x_train.append(x_test.pop(r))
         y_train.append(y_test.pop(r))
     return  x_train,y_train,x_test,y_test

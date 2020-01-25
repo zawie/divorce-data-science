@@ -1,8 +1,11 @@
 from sklearn import svm
+from sklearn.model_selection import cross_validate
 import data
+import time
 
-x_train, y_train, x_test, y_test = data.split(.8)
+X,y = data.get()
 
 clf = svm.SVC()
-clf.fit(x_train, y_train)
-print(clf.score(x_test, y_test))
+cv_results = cross_validate(clf, X, y, cv=2)
+print(cv_results)
+
