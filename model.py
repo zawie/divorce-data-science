@@ -2,6 +2,7 @@ from sklearn import svm
 from sklearn.model_selection import cross_validate
 import data
 import time
+import copy
 
 removed = []
 
@@ -10,13 +11,18 @@ inputs, categories = data.get_shuffled()
 #TODO: switch to True once we actually want to run it
 while False:
     #Ends once there are only this many questions left
-    if len(data) == 10:
+    if len(data) == 1:
         break
     lowest_impact_idx = 0
     lowest_impact_cv_results = "temp"
     for idx in range(categories):
+        temp_inputs = copy.deepcopy(inputs)
+        temp_categories = copy.deepcopy(categories)
+        temp_inputs.pop(idx)
+        temp_categories.pop(idx)
+
         clf = svm.SVC()
-        cv_results = cross_validate(clf, inputs, categories, cv=2)
+        cv_results = cross_validate(clf, temp_inputs, temp_categories, cv=2)
         results = data.assess_results(cv_results)
         if results < lowest_impact_cv_results:
             lowest_impact_idx = idx
