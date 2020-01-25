@@ -1,6 +1,15 @@
 import csv
 import random
 
+def shuffle(X,y):
+    size = len(X)
+    new_X,new_y = [],[]
+    for _ in range(size):
+        r = random.randint(0,len(X)-1)
+        new_X.append(X.pop(r))
+        new_y.append(y.pop(r))
+    return new_X,new_y
+
 def get():
     x = [] #questions
     y = [] #divorce or no divorce
@@ -20,16 +29,10 @@ def get():
                 x.append(elements)  #add input matrix
     return x,y
 
-def split(train_ratio):
-    x_test,y_test = get()
-    x_train, y_train = [],[]
-    num_train = int(train_ratio * len(x_test))
-    for i in range(num_train):
-        size = len(x_test)
-        r = random.randint(0,size)
-        x_train.append(x_test.pop(r))
-        y_train.append(y_test.pop(r))
-    return  x_train,y_train,x_test,y_test
+def get_shuffled():
+    X,y = get()
+    return shuffle(X,y)
 
 def assess_results(model):
     pass
+
