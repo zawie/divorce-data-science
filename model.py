@@ -1,14 +1,13 @@
 from sklearn import svm
 import data
+import random
 
+X,y = data.get()
 
-X,y= data.get()
-num_inputs = len
+train,test = data.split(X,120)
+print(len(train),len(test))
 
-print(X,y)
-#X = [[0, 0], [1, 1]] #inputs
-#y = [0, 1] #groups
+#clf = svm.SVC()
+#clf.fit(X, y)
 
-clf = svm.SVC()
-clf.fit(X, y)
-print(clf.predict([[0]*len(X[0])]))
+#print(clf.predict(inputs))
