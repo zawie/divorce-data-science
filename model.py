@@ -3,17 +3,22 @@ from sklearn.model_selection import cross_validate
 import data
 import time
 import copy
+import matplotlib.pyplot as plt
 
 removed = []
 inputs, labels = data.get_shuffled()
 num_rows = len(inputs)
 
 def trainAndTest(X,y):
-    clf = svm.SVC()
-    cv_results = cross_validate(clf, X, y, cv=5)
-    results = data.assess_results(cv_results)
-    average_accuracy = sum(cv_results['test_score'])/len(cv_results['test_score'])
-    return average_accuracy
+    total_acc = 0
+    run_times = 10
+    for i in range(run_times):
+        clf = svm.SVC()
+        cv_results = cross_validate(clf, X, y, cv=3)
+        results = data.assess_results(cv_results)
+        average_accuracy = sum(cv_results['test_score'])/len(cv_results['test_score'])
+        total_acc += average_accuracy
+    return total_acc/run_times
 
 def getColumns():
     return len(inputs[0])
@@ -25,7 +30,7 @@ def removeColumn(X,col):
     return rem_col
 
 #TODO: switch to True once we actually want to run it
-while getColumns() > 0:
+while getColumns() > 1:
     num_columns = getColumns()
     lowest_impact_idx = 0
     lowest_impact_cv_results = None
@@ -47,6 +52,14 @@ while getColumns() > 0:
     removed.append(lowest_val_col)
     print("removed", len(inputs[0]))
 
+num_remaining = []
+accuracy = []
+for dat_point in removed:
+    num_remaining.append(dat_point[2])
+    accuracy.append(dat_point[1])
+
+plt.plot(num_remaining, accuracy)
+plt.show()
 for dat in removed:
     print(dat[1:])
 """
