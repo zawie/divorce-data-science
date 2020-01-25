@@ -9,12 +9,9 @@ removed = []
 inputs, categories = data.get_shuffled()
 
 #TODO: switch to True once we actually want to run it
-while False:
-    #Ends once there are only this many questions left
-    if len(data) == 1:
-        break
+while len(data) > 0:
     lowest_impact_idx = 0
-    lowest_impact_cv_results = "temp"
+    lowest_impact_cv_results = None
     for idx in range(categories):
         temp_inputs = copy.deepcopy(inputs)
         temp_categories = copy.deepcopy(categories)
@@ -24,7 +21,7 @@ while False:
         clf = svm.SVC()
         cv_results = cross_validate(clf, temp_inputs, temp_categories, cv=2)
         results = data.assess_results(cv_results)
-        if results < lowest_impact_cv_results:
+        if lowest_impact_cv_results is None or results < lowest_impact_cv_results:
             lowest_impact_idx = idx
             lowest_impact_cv_results = results
 
