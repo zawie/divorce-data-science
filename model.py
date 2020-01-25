@@ -10,9 +10,9 @@ num_rows = len(inputs)
 
 def trainAndTest(X,y):
     clf = svm.SVC()
-    cv_results = cross_validate(clf, X, y, cv=2)
+    cv_results = cross_validate(clf, X, y, cv=5)
     results = data.assess_results(cv_results)
-    average_accuracy = mean(results)
+    average_accuracy = sum(cv_results['test_score'])/len(cv_results['test_score'])
     return average_accuracy
 
 def getColumns():
@@ -20,23 +20,22 @@ def getColumns():
 
 def removeColumn(X,col):
     rem_col = []
-    for r in len(X):
+    for r in range(len(X)):
         rem_col.append(X[r].pop(col))
     return rem_col
 
 #TODO: switch to True once we actually want to run it
-
 while getColumns() > 0:
     num_columns = getColumns()
     lowest_impact_idx = 0
     lowest_impact_cv_results = None
-    for c in num_columns:
+    for c in range(num_columns):
         #copy and remove column
         temp_inputs = copy.deepcopy(inputs)
         removeColumn(temp_inputs,c)
         #train & test
         average_accuracy = trainAndTest(temp_inputs,labels)
-        if (lowest_impact_cv_results is None)or (average_accuracy < lowest_impact_cv_results):
+        if (lowest_impact_cv_results is None) or (average_accuracy > lowest_impact_cv_results):
             lowest_impact_idx = c
             lowest_impact_cv_results = average_accuracy
 
@@ -44,10 +43,16 @@ while getColumns() > 0:
 
     #Stores info about the removed row
     #(data in row, category of row, results of removal)
-    lowest_val_col = (removeColumn(inputs), lowest_impact_idx, lowest_impact_cv_results, len(inputs[0]))
+    lowest_val_col = (removeColumn(inputs, lowest_impact_idx), lowest_impact_cv_results, len(inputs[0]))
     removed.append(lowest_val_col)
+    print("removed", len(inputs[0]))
 
+for dat in removed:
+    print(dat[1:])
+"""
 inputs, categories = data.get_shuffled()
-clf = svm.SVC()
-cv_results = cross_validate(clf,inputs,categories,cv=5)
-print(cv_results)
+print(trainAndTest(inputs, categories))
+#clf = svm.SVC()
+#cv_results = cross_validate(clf,inputs,categories,cv=5)
+#print(cv_results)
+"""
