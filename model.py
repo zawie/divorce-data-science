@@ -1,6 +1,5 @@
 from sklearn import svm
 import data
-import random
 
 X,y = data.get()
 

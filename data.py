@@ -1,5 +1,6 @@
 import csv
- 
+import random
+
 def get():
     x = [] #questions
     y = [] #divorce or no divorce
