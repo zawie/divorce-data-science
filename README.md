@@ -1,3 +1,6 @@
+#Website
+Go to the linked website for a better reading experience: www.zawie.zone/divorce-data-science
+#Quick Text
 Using SVM Models to Optimize Divorce Predictor Scales
 Introduction:
 	We were very intrigued by the Divorce Predictors data set (Source A), largely due to the ease with which the data could be understood and the vast social implications of the subsequent data analyses.
