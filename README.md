@@ -1,5 +1,5 @@
 # Website
-Go to the linked website for a better reading experience: www.zawie.zone/divorce-data-science
+Go to the linked website for a better reading experience: https://divorce.zawie.io
 
 # Quick Text
 Using SVM Models to Optimize Divorce Predictor Scales
